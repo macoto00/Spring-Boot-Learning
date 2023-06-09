@@ -1,0 +1,1 @@
+SELECT name FROM applicants ORDER BY age ASC LIMIT 5
