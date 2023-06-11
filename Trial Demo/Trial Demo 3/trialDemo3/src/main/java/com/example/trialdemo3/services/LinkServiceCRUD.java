@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class LinkServiceCRUD implements LinkService {
@@ -38,5 +39,9 @@ public class LinkServiceCRUD implements LinkService {
     @Override
     public void deleteLink(Long id, String secretCode) {
 
+    }
+
+    private String generateSecretCode() {
+        return String.format("%04d", new Random().nextInt(10000));
     }
 }
