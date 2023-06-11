@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URL Changer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<!-- ========== Container ========== -->
+<div class="container">
+  <p class="message"></p>
+
+  <!-- ========== Form ========== -->
+  <form action="http://localhost:8080/api/links" method="POST" class="form">
+    <label for="url">URL
+      <input type="text" name="url" required />
+    </label>
+    <label for="alias">Alias
+      <input type="text" name="alias" required />
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+
+</html>
