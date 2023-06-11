@@ -1,13 +1,20 @@
 package com.example.trialdemo3.controllers;
 
+import com.example.trialdemo3.services.LinkService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AppController {
+    private final LinkService linkService;
+    @Autowired
+    public AppController(LinkService linkService) {
+        this.linkService = linkService;
+    }
 
     @PostMapping("/api/links")
-    public ResponseEntity<?> createLink (@RequestParam String alias) {
+    public ResponseEntity<?> createLink(@RequestParam String alias) {
         return null;
     }
 
