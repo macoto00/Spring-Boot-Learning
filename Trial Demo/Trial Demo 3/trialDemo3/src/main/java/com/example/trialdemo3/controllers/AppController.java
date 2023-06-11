@@ -1,6 +1,7 @@
 package com.example.trialdemo3.controllers;
 
 import com.example.trialdemo3.DTOS.LinkDTO;
+import com.example.trialdemo3.models.Link;
 import com.example.trialdemo3.services.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,14 +12,16 @@ import java.util.List;
 @RestController
 public class AppController {
     private final LinkService linkService;
+
     @Autowired
     public AppController(LinkService linkService) {
         this.linkService = linkService;
     }
 
     @PostMapping("/api/links")
-    public ResponseEntity<?> createLink(@RequestParam String alias) {
-        return null;
+    public ResponseEntity<?> createLink(@RequestBody Link link) {
+        linkService.createLink(link);
+        return ResponseEntity.ok().body(link);
     }
 
     @GetMapping("/a/{alias}")

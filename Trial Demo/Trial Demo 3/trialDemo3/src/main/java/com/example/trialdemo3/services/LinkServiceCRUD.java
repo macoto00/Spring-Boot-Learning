@@ -35,12 +35,14 @@ public class LinkServiceCRUD implements LinkService {
 
     @Override
     public void createLink(Link link) {
-        Link newLink = new Link();
-        newLink.setUrl(link.getUrl());
-        newLink.setAlias(link.getAlias());
-        newLink.setHitCount(link.getHitCount());
-        newLink.setSecretCode(generateSecretCode());
-        linkRepository.save(newLink);
+        String aliasToCheck = link.getAlias();
+        List<Link> listOfAllLinks = (List<Link>) linkRepository.findAll();
+        if (listOfAllLinks.stream().map(Link::getAlias).anyMatch(aliasToCheck::equals)) {
+            throw new RuntimeException("400 Bad Request");
+        } else {
+            link.setSecretCode(generateSecretCode());
+            linkRepository.save(link);
+        }
     }
 
     @Override
