@@ -1,9 +1,12 @@
 package com.example.trialdemo3.controllers;
 
+import com.example.trialdemo3.DTOS.LinkDTO;
 import com.example.trialdemo3.services.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AppController {
@@ -25,7 +28,8 @@ public class AppController {
 
     @GetMapping("/api/links")
     public ResponseEntity<?> getAllLinks() {
-        return null;
+        List<LinkDTO> listToReturn = linkService.getAllLinks();
+        return ResponseEntity.ok().body(listToReturn);
     }
 
     @DeleteMapping("/api/links/{id}")
