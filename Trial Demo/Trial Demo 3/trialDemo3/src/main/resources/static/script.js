@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             secretCode: null
         };
 
-        fetch("http://localhost:8080/api/links", {
+        fetch("/api/links", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

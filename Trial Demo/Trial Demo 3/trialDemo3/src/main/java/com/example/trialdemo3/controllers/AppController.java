@@ -1,14 +1,16 @@
 package com.example.trialdemo3.controllers;
 
 import com.example.trialdemo3.DTOS.LinkDTO;
+import com.example.trialdemo3.DTOS.SecretCode;
 import com.example.trialdemo3.models.Link;
 import com.example.trialdemo3.services.LinkService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class AppController {
@@ -31,8 +33,15 @@ public class AppController {
     }
 
     @GetMapping("/a/{alias}")
-    public ResponseEntity<?> incrementHitCount(@RequestParam String alias) {
-        return null;
+    public ResponseEntity<?> incrementHitCount(@PathVariable String alias, HttpServletResponse response) {
+        if (linkService.aliasIsPresent(alias)) {
+            linkService.incrementHitCount(alias);
+            String url = linkService.getUrlByAlias(alias);
+            response.setHeader("Location", url);
+            return ResponseEntity.status(HttpStatus.MOVED_PERMANENTLY).header("Location", url).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/api/links")
@@ -43,8 +52,19 @@ public class AppController {
 
     @DeleteMapping("/api/links/{id}")
     public ResponseEntity<?> deleteLink(
-            @RequestParam Long id,
-            @RequestBody String alias) {
-        return null;
+            @PathVariable Long id,
+            @RequestBody SecretCode secretCode) {
+        Optional<Link> linkOptional = linkService.findLinkById(id);
+        if (linkOptional.isPresent()) {
+            Link link = linkOptional.get();
+            if (secretCode.getSecretCode().equals(link.getSecretCode())) {
+                linkService.deleteLink(id, secretCode);
+                return ResponseEntity.noContent().build();
+            } else {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 }

@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LinkRepository extends CrudRepository<Link, Long> {
     Link findByAlias(String alias);
+    boolean existsByAlias(String alias);
 }
