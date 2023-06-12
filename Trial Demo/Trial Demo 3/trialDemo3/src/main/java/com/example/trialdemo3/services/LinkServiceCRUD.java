@@ -51,6 +51,13 @@ public class LinkServiceCRUD implements LinkService {
     }
 
     @Override
+    public boolean aliasIsPresent(String alias) {
+        List<Link> listOfAllLinks = (List<Link>) linkRepository.findAll();
+        return listOfAllLinks.stream().anyMatch(link -> alias.equals(link.getAlias()));
+    }
+
+
+    @Override
     public void incrementHitCount(String alias) {
 
     }

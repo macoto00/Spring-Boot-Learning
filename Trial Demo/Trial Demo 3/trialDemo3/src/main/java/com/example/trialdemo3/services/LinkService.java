@@ -9,6 +9,7 @@ public interface LinkService {
     List<LinkDTO> getAllLinks();
     void createLink(Link link);
     String getUrlByAlias(String alias);
+    boolean aliasIsPresent(String alias);
     void incrementHitCount(String alias);
     void deleteLink(Long id, String secretCode);
 }

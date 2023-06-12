@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(data => {
                 console.log(data);
-                console.log("You provided data fot Link creation");
+                console.log("You provided data for Link creation");
 
                 // Show the success message
                 message.textContent = `Your URL is aliased to ${data.alias} and your secret code is ${data.secretCode}`;

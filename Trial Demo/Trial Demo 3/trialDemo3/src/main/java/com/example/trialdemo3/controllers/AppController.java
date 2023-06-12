@@ -4,6 +4,7 @@ import com.example.trialdemo3.DTOS.LinkDTO;
 import com.example.trialdemo3.models.Link;
 import com.example.trialdemo3.services.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,13 @@ public class AppController {
 
     @PostMapping("/api/links")
     public ResponseEntity<?> createLink(@RequestBody Link link) {
-        linkService.createLink(link);
-        return ResponseEntity.ok().body(link);
+        String aliasToCheck = link.getAlias();
+        if (linkService.aliasIsPresent(aliasToCheck)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } else {
+            linkService.createLink(link);
+            return ResponseEntity.ok().body(link);
+        }
     }
 
     @GetMapping("/a/{alias}")
