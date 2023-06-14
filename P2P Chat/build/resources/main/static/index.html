@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer to Peer App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="background.css">
+</head>
+
+<body>
+
+<div class="background">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<!-- ========== Container ========== -->
+<div class="container">
+
+    <!-- ========== Header ========== -->
+    <header>
+        <h1>Peer to Peer Chat Program</h1>
+    </header>
+
+    <!-- ========== List of Posts ========== -->
+    <div class="list">
+        <ul>
+            <li>
+                <p class="username">App</p>
+                <p class="text">Hi there! Submit your message using the send button!</p>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ========== Form for Message ========== -->
+    <form action="/" method="POST" class="addMessage">
+        <label for="user"> User
+            <input type="text" name="user" placeholder="Your username..." required>
+        </label>
+        <label for="message"> Message
+            <textarea name="message" id="" cols="50" rows="5" placeholder="Write your message..." required></textarea>
+        </label>
+        <button type="submit" name="submit" class="submit">Send</button>
+        <input type="submit" name="refresh" value="Refresh" class="refresh">
+    </form>
+</div>
+
+<!-- ========== Script ========== -->
+<script src="script.js"></script>
+</body>
+
+</html>
